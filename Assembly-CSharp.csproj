@@ -55,14 +55,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\BrainRotation.cs" />
-     <Compile Include="Assets\Draw.cs" />
-     <Compile Include="Assets\MakeInvisible.cs" />
-     <Compile Include="Assets\NetworkDataManager.cs" />
-     <Compile Include="Assets\NetworkManager.cs" />
-     <Compile Include="Assets\NetworkPlayer.cs" />
-     <Compile Include="Assets\NetworkPlayerSpawner.cs" />
-     <Compile Include="Assets\NetworkPointer.cs" />
+     <Compile Include="Assets\AnnotationSerializer.cs" />
+     <Compile Include="Assets\Brains\BrainRotation.cs" />
+     <Compile Include="Assets\ColorSelector.cs" />
+     <Compile Include="Assets\Drawing\DrawLineManager.cs" />
+     <Compile Include="Assets\Drawing\Globals.cs" />
+     <Compile Include="Assets\Drawing\GraphicsLineRenderer.cs" />
+     <Compile Include="Assets\Drawing\ReconstructAnnotations.cs" />
+     <Compile Include="Assets\FlexibleColorPicker\ExampleScene\FCP_ExampleScript.cs" />
+     <Compile Include="Assets\FlexibleColorPicker\Scripts\FCP_SpriteMeshEditor.cs" />
+     <Compile Include="Assets\FlexibleColorPicker\Scripts\FlexibleColorPicker.cs" />
+     <Compile Include="Assets\LaserPointTransferScript.cs" />
+     <Compile Include="Assets\MenuManager.cs" />
+     <Compile Include="Assets\Network\NetworkDataManager.cs" />
+     <Compile Include="Assets\Network\NetworkManager.cs" />
+     <Compile Include="Assets\Network\NetworkPlayer.cs" />
+     <Compile Include="Assets\Network\NetworkPlayerSpawner.cs" />
+     <Compile Include="Assets\Network\NetworkPointer.cs" />
      <Compile Include="Assets\Oculus\AudioManager\Scenes\Scripts\TestScript.cs" />
      <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\AmbienceEmitter.cs" />
      <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\AudioManager.cs" />
@@ -232,7 +241,7 @@
      <Compile Include="Assets\Scripts\ControllerPointer.cs" />
      <Compile Include="Assets\Scripts\HandPresence.cs" />
      <Compile Include="Assets\Scripts\SetUITransformRay.cs" />
-     <Compile Include="Assets\SliderChange.cs" />
+     <Compile Include="Assets\UI\SliderChange.cs" />
      <Compile Include="Assets\WorkstationGenerator.cs" />
      <Compile Include="Assets\XRRigScript.cs" />
      <None Include="Assets\Oculus\SampleFramework\Usage\HandsTrainExample\Shaders\XingLightShader.shader" />
@@ -279,6 +288,7 @@
      <None Include="Assets\Photon\PhotonUnityNetworking\readme.txt" />
      <None Include="Assets\Oculus\SampleFramework\Core\HandsInteraction\Shaders\OculusSampleAlphaHandOutline.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+     <None Include="Assets\FlexibleColorPicker\Materials\FCP_Gradient.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
      <None Include="Assets\Oculus\SampleFramework\Usage\HandsTrainExample\Shaders\OculusSampleTrainSmokeShader.shader" />
      <None Include="Assets\Oculus\SampleFramework\Usage\OVROverlayCanvas\Shaders\UI Prerendered Opaque.shader" />
