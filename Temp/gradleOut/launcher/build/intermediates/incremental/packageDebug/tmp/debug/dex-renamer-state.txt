@@ -1,0 +1,4 @@
+#Sun May 09 03:04:58 EDT 2021
+base.0=/Users/cecegao/Desktop/Multiplayer Integration copy/Temp/gradleOut/launcher/build/intermediates/transforms/dexMerger/debug/0
+path.0=classes.dex
+renamed.0=classes.dex
