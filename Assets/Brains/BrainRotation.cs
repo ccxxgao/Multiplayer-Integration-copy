@@ -5,30 +5,12 @@ using UnityEngine.UI; // Required when Using UI elements.
 
 public class BrainRotation : MonoBehaviour 
 {
-	// public Slider mainSlider;
-
-    // public GameObject brain;
-	
-	// public void Start()
-	// {
-	// 	//Adds a listener to the main slider and invokes a method when the value changes.
-	// 	mainSlider.onValueChanged.AddListener (delegate {ValueChangeCheck ();});
-	// }
-	
-	// // Invoked when the value of the slider changes.
-	// public void ValueChangeCheck()
-	// {  
-    //     var degree = (int) (mainSlider.value*360.0f);
-    //     // brain.transform.Rotate(new Vector3(0, 0, degree), Space.Self);
-    //     brain.transform.Rotate(Vector3.up * Time.deltaTime, Space.World);
-    //     // Vector3.up * Time.deltaTime
-    //     // degreeText.text = degree.ToString() + "°";
-	// 	// Debug.Log (mainSlider.value);
-	// }
 
      // Assign in the inspector
      public GameObject brain;
-     public Slider sliderForward;
+     public Slider slider;
+
+     public Text text;
 
     //  public Button button;
 
@@ -37,36 +19,30 @@ public class BrainRotation : MonoBehaviour
     //  public Text textValue;
  
      // Preserve the original and current orientation
-     [SerializeField] private float previousValueForward;
+     [SerializeField] private float previousValue;
     //  [SerializeField] private float previousValueUp;
 
     void Awake ()
-     {
-        //  this.LoadState();
-        //  textValue.text = previousValueForward.ToString();
-        //  Debug.Log("previousValueForward: " + previousValueForward);
-         // Assign a callback for when this slider changes
-         this.sliderForward.onValueChanged.AddListener(this.OnSliderForwardChanged);
-         // And current value
-         this.previousValueForward = this.sliderForward.value;
-
-        // Assign a callback for when this slider changes
-        //  this.sliderUp.onValueChanged.AddListener(this.OnSliderUpChanged);
-        //  // And current value
-        //  this.previousValueUp = this.sliderUp.value;
-
+    {
+        slider.onValueChanged.AddListener(this.OnSliderChanged);
+        previousValue = slider.value;
      }
 
+    // void Update() {
+    //     text.text += "previousValue: " + previousValue;
+    // }
 
-    void OnSliderForwardChanged(float value)
+    void OnSliderChanged(float value)
      {
          // How much we've changed
-         float delta = value - this.previousValueForward;
-         this.brain.transform.Rotate(Vector3.forward * delta * 360);
+         text.text += "\nChanging rotation value to " + value;
+         float delta = value - previousValue;
+         brain.transform.Rotate(Vector3.forward * delta * 360f);
  
          // Set our previous value for the next change
-         this.previousValueForward = value;
-         this.SaveState("BrainRotationForward", previousValueForward);
+         previousValue = value;
+        //  text.text =
+        //  this.SaveState("BrainRotationForward", previousValue);
 
         // Hashtable hash = new Hashtable();
         // hash.Add("Rotation", previousValueForward);
@@ -84,12 +60,9 @@ public class BrainRotation : MonoBehaviour
     //      this.SaveState("BrainRotationUp", previousValueUp);
     //  }
 
-    public void SaveState(string variableName, float variable) {
-        PlayerPrefs.SetFloat(variableName, variable);
-        PlayerPrefs.Save();
-        // Debug.Log(previousValueForward);
-    }
-
-
-
+    // public void SaveState(string variableName, float variable) {
+    //     PlayerPrefs.SetFloat(variableName, variable);
+    //     PlayerPrefs.Save();
+    //     // Debug.Log(previousValueForward);
+    // }
 }

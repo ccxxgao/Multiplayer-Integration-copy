@@ -36,10 +36,6 @@ public class NetworkPlayer : MonoBehaviour
         leftHandRig = rig.transform.Find("OVRCameraRig/TrackingSpace/LeftHandAnchor/LeftControllerAnchor");
         rightHandRig = rig.transform.Find("OVRCameraRig/TrackingSpace/RightHandAnchor/RightControllerAnchor");
 
-        // headRig = rig.transform.Find("Camera Offset/Main Camera");
-        // leftHandRig = rig.transform.Find("Camera Offset/LeftHand Controller");
-        // rightHandRig = rig.transform.Find("Camera Offset/RightHand Controller");
-
         if (photonView.IsMine){
             foreach (var item in GetComponentsInChildren<Renderer>())
             {
@@ -94,14 +90,4 @@ public class NetworkPlayer : MonoBehaviour
         target.position = rigTransform.position;
         target.rotation = rigTransform.rotation;
     }
-
-    [PunRPC]
-    void InitializeMyPlayerRPC(int brainRot)
-    {
-        // Dictionary<string, string> data = dataToShare as Dictionary<string, string>;          
-        // player.Name = data["BrainRotation"].ToString();
-        // brainRotation = brainRot;
-        Debug.Log("OMFG IT'S HERE");
-    }
-
 }

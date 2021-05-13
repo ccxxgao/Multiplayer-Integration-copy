@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 
@@ -8,37 +9,53 @@ public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
 {
     private GameObject spawnedPlayerPrefab;
 
-    // private Vector3[] spawnPoints = new Vector3[4];
-    
-    // private GameObject spawnPoint;
     private int networkPlayerID;
+
+    // public Dropdown dropdown;
+
+    // private int numPlayers = 0;
 
     public override void OnJoinedRoom()
     {   
         base.OnJoinedRoom();
         
         // initializeSpawnPoint();
-        networkPlayerID = (int)(PhotonNetwork.LocalPlayer.ActorNumber % 4);
+        networkPlayerID = Globals.convert(PhotonNetwork.LocalPlayer.ActorNumber);
         // Initialize user stuff
         // UpdateParticleColor(true);
         // var spawnPoint = GameObject.Find(station);
         // if (spawnPoint == null) {
         //     Debug.Log("Yikes");
+        // // }
+        // foreach (Player player in PhotonNetwork.PlayerList) {
+        // // for (int i = 1; i < 5; i++){
+        //     // int num = player.ActorNumber % 4;
+        //     if (player.ActorNumber != PhotonNetwork.LocalPlayer.ActorNumber) {
+        //         // Debug.Log("HERE HERE HERE" + num);
+        //         // this.addPlayerToDropdown(player.ActorNumber);
+        //         // Debug.Log("HERE" + station);
+        //         // UpdateParticleColor(num, true);
+        //     }
         // }
-        foreach (Player player in PhotonNetwork.PlayerList) {
-        // for (int i = 1; i < 5; i++){
-            int num = player.ActorNumber % 4;
-            if (num != networkPlayerID) {
-                Debug.Log("HERE HERE HERE" + num);
-                // Debug.Log("HERE" + station);
-                // UpdateParticleColor(num, true);
-            }
-        }
 
         Debug.Log("Network Player ID: " + networkPlayerID);
         spawnedPlayerPrefab = PhotonNetwork.Instantiate("Network Player", transform.position, transform.rotation);    
         // UpdateParticleColor(networkPlayerID, true);
     }
+
+    // private void addPlayerToDropdown(int newPlayerID) {
+    //     dropdown.options.Add(new Dropdown.OptionData(newPlayerID.ToString()));
+    //     if (dropdown.options.Count == 1) {
+    //         dropdown.value = 0;
+    //     } 
+    // }
+
+    // void Update() {
+    //     if (PhotonNetwork.PlayerList != numPlayers) {
+
+    //     }
+    // }
+
 
     // private void UpdateParticleColor(int num, bool status)   // 0 = left, 1 = joined
     // {

@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 5193138700030598331}
   - component: {fileID: 4717539551275194651}
   - component: {fileID: 4717539551275194649}
-  - component: {fileID: 4717539551275194648}
   - component: {fileID: 4717539551275194647}
+  - component: {fileID: 7064788567371095434}
   m_Layer: 2
   m_Name: "Decimated Brain \u2013 Intersection"
   m_TagString: BrainMesh
@@ -44,7 +44,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4717539551275194652}
-  m_Mesh: {fileID: -5189908302815954599, guid: f84c0c2d3bbfc48ceadbf453108b0ecd, type: 3}
+  m_Mesh: {fileID: -5189908302815954599, guid: a6a60b1be07924c2a8cb2f2631c960a0, type: 3}
 --- !u!23 &5193138700030598331
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -113,21 +113,6 @@ MonoBehaviour:
   usePerEyeCameras: 1
   useFixedUpdateForTracking: 1
   disableEyeAnchorCameras: 1
---- !u!114 &4717539551275194648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4717539551275194652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31d4a0709ee7e4f2cbb85cd9a622a1dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  brain: {fileID: 4717539551275194652}
-  sliderForward: {fileID: 0}
-  previousValueForward: 0
 --- !u!114 &4717539551275194647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,6 +129,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4
   sortOrder: 0
+--- !u!114 &7064788567371095434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4717539551275194652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ea3557d2471b40d2a1bda8dc83d9efd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brain: {fileID: 4717539551275194652}
+  slider: {fileID: 0}
+  text: {fileID: 0}
+  previousValue: 0
 --- !u!1 &5312213496261981517
 GameObject:
   m_ObjectHideFlags: 0

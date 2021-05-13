@@ -14,7 +14,7 @@ public class SliderChange : MonoBehaviour
 
     public Text degreeText;
 
-	public string storedState;
+	// public string storedState;
 
 	private float initValue;
 
@@ -35,15 +35,14 @@ public class SliderChange : MonoBehaviour
 
 	public GameObject sphere;
 
-	private int playerID;
+	private int playerID = -1;
+
+	public Dropdown playerDropdown;
 	
-    // public const byte AnnotationsRequest = 1;
 	
 	public void Start()
 	{
-		this.LoadState();
-		localPlayer = PhotonNetwork.LocalPlayer;
-		playerID = localPlayer.ActorNumber % 4;
+		// this.LoadState();
 		degreeText.text = ((int)(initValue*360f)).ToString() + "°";
 		mainSlider.value = initValue;
 		liveMode = false;
@@ -52,49 +51,54 @@ public class SliderChange : MonoBehaviour
 
 		//Adds a listener to the main slider and invokes a method when the value changes.
 		mainSlider.onValueChanged.AddListener (delegate {ValueChangeCheck ();});
-		resetButton.onClick.AddListener(delegate {this.SendMessageToOtherUser (); });
+		resetButton.onClick.AddListener(delegate {this.SendSyncRequest (); });
 		toggle.onValueChanged.AddListener (delegate {this.InitiateLiveMode (); });
 
 		// Network stuff
         hash.Add("Rotation", initValue);
 		hash.Add("LaserPosition", Vector3.zero);
 		hash.Add("LiveMode", false);
-        localPlayer.SetCustomProperties(hash);
+        // localPlayer.SetCustomProperties(hash);
 
 		// Create a deactive sphere to activate when live mode is turned on
 		// sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
 		// sphere.material = 
         // sphere.transform.position = new Vector3(0, 1.5f, 0);
 	}
-
-
-	public void OnEnable()
-	{
-		PhotonNetwork.NetworkingClient.EventReceived += OnEvent;
+	private int checkRecipientPresence(int recipient) {
+		int convertedRecipient = Globals.convert(recipient);
+		// consoleText.text += "convertedRecipient:" + convertedRecipient.ToString() + "; playerID:" + playerID.ToString();
+		if (convertedRecipient == playerID) {
+			consoleText.text += "Error: Cannot sync with yourself.\n";
+			return -1;
+		}
+		foreach (Player player in PhotonNetwork.PlayerList) {
+			if (Globals.convert(player.ActorNumber) == convertedRecipient) {
+				return player.ActorNumber;
+			}
+		}
+		consoleText.text += "Error: Specified recipient does not exist in the room.\n";
+		return -1;
 	}
 
-	public void OnDisable()
-	{
-		PhotonNetwork.NetworkingClient.EventReceived -= OnEvent;
-	}	
-
-	void SendMessageToOtherUser() {
-		object[] content = new object[] { "Hello" }; // Array contains the target position and the IDs of the selected units
-        RaiseEventOptions raiseEventOptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others }; // You would have to set the Receivers to All in order to receive this event on the local client as well
-        PhotonNetwork.RaiseEvent(Globals.ANNOTATIONS_REQUEST, content, raiseEventOptions, SendOptions.SendReliable);
+	private void getLocalPlayer () {
+		localPlayer = PhotonNetwork.LocalPlayer;
+		playerID = Globals.convert(localPlayer.ActorNumber);
 	}
 
-	public void OnEvent(EventData photonEvent)
-	{
-		byte eventCode = photonEvent.Code;
-
-		if (eventCode == Globals.TEST_TEXT)
-		{
-			object[] data = (object[])photonEvent.CustomData;
-			consoleText.text = (string) data[0];
+	void SendSyncRequest() {
+		if (localPlayer == null) {
+			getLocalPlayer();
+		}
+		int recipient = playerDropdown.value+1;
+		int actualRecipientID = checkRecipientPresence(recipient);
+		if (actualRecipientID > -1) {
+			object[] content = new object[] { "Requesting Annotation" }; // Array contains the target position and the IDs of the selected units
+			RaiseEventOptions raiseEventOptions = new RaiseEventOptions { TargetActors = new int[] {actualRecipientID }};
+			consoleText.text += "Sending request to Player " + actualRecipientID + "\n";
+			PhotonNetwork.RaiseEvent(Globals.ANNOTATIONS_REQUEST, content, raiseEventOptions, SendOptions.SendReliable);
 		}
 	}
-
 
 	void InitiateLiveMode() {
 		foreach (Player player in PhotonNetwork.PlayerList) {
@@ -151,16 +155,16 @@ public class SliderChange : MonoBehaviour
 		}
 	}
 
-	void ResetSlider () {
-		if (mainSlider.value != 0.5f)
-			mainSlider.value = 0.0f;
-		if (mainSlider.value == 0f)
-			mainSlider.value = 0.5f;
-		// Text text = resetButton.GetComponent<Text>();
-		// text.text = "Clicked";
-		// resetButton.Text = "CLICKED";
+	// void ResetSlider () {
+	// 	if (mainSlider.value != 0.5f)
+	// 		mainSlider.value = 0.0f;
+	// 	if (mainSlider.value == 0f)
+	// 		mainSlider.value = 0.5f;
+	// 	// Text text = resetButton.GetComponent<Text>();
+	// 	// text.text = "Clicked";
+	// 	// resetButton.Text = "CLICKED";
 		
-	}
+	// }
 	
 	// Invoked when the value of the slider changes.
 	public void ValueChangeCheck()
@@ -173,7 +177,7 @@ public class SliderChange : MonoBehaviour
         localPlayer.SetCustomProperties(hash);
 	}
 
-    public void LoadState() {
-        initValue = PlayerPrefs.GetFloat(storedState, 0.0f);
-    }
+    // public void LoadState() {
+    //     initValue = PlayerPrefs.GetFloat(storedState, 0.0f);
+    // }
 }

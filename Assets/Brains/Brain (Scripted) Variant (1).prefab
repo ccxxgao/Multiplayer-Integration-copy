@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5316443580761763066}
   - component: {fileID: 9108555335907074911}
   - component: {fileID: 6452780411073992597}
-  - component: {fileID: 2768595925615265458}
+  - component: {fileID: 7367308712315491306}
   m_Layer: 0
   m_Name: Brain (Scripted) Variant (1)
   m_TagString: BrainMesh
@@ -81,7 +81,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2768595925615265458
+--- !u!114 &7367308712315491306
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,9 +90,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4795240586603247168}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31d4a0709ee7e4f2cbb85cd9a622a1dc, type: 3}
+  m_Script: {fileID: 11500000, guid: 5ea3557d2471b40d2a1bda8dc83d9efd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   brain: {fileID: 4795240586603247168}
-  sliderForward: {fileID: 0}
-  previousValueForward: 0
+  slider: {fileID: 0}
+  text: {fileID: 0}
+  previousValue: 0
